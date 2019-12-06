@@ -7,21 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using PacketDotNet;
 using SharpPcap;
 
 namespace MyPacketCapturer
 {
+    public class AnswerEventArgs : EventArgs
+    {
+        public int Answer { get; set; }
+    }
+    public delegate void AnswerHandler(object sender, AnswerEventArgs e);
     public partial class frmCapture : Form
     {
-        CaptureDeviceList devices; //List of devices for this computer
+        public event AnswerHandler AnswerEvent;
+        public CaptureDeviceList devices; //List of devices for this computer
         public static ICaptureDevice device; //The device we will be using
         public static string stringPackets = ""; //Data that is captured
         static int numPackets = 0;
         frmSend fSend; //This will be our send form
 
         public frmCapture()
-        {
+        {                                                                
             InitializeComponent();
 
             //Get list of devices
@@ -30,8 +37,8 @@ namespace MyPacketCapturer
             //Make sure there is at least one device
             if (devices.Count < 1)
             {
-                MessageBox.Show("No capture devices found!!!");
-                Application.Exit();
+               MessageBox.Show("No capture devices found!!!");
+               Application.Exit();
             }
 
             //Add the devices to the combo box
@@ -50,11 +57,10 @@ namespace MyPacketCapturer
             //Open the device for capturing
             int readTimeoutMilliseconds = 1000;
             device.Open(DeviceMode.Promiscuous, readTimeoutMilliseconds);
-
-
+            
         }
-
-        private void btnStartStop_Click(object sender, EventArgs e)
+        
+        public void btnStartStop_Click(object sender, EventArgs e)
         {
             try
             {
@@ -72,11 +78,16 @@ namespace MyPacketCapturer
                 }
             }
             catch (Exception ex) { }
+            
+        }
+        public void UpdateView(string test)
+        {
+            this.btnStartStop.Text = test;
         }
 
-        private static void device_OnPacketArrival(object sender, CaptureEventArgs packet)
+        public static void device_OnPacketArrival(object sender, CaptureEventArgs packet)
         {
-
+            
             //Increment the number of packets captured
             numPackets++;
 
@@ -86,16 +97,18 @@ namespace MyPacketCapturer
 
             //Array to store our data
             byte[] data = packet.Packet.Data;
+            
 
             //Keep track of the number of bytes displayed per line
             int byteCounter = 0;
 
             stringPackets += "Destination MAC Address: ";
+            
             //Parsing the packets
             foreach (byte b in data)
             {
                 //Add the byte to our string (in hexidecimal)
-                if(byteCounter <= 13) stringPackets += b.ToString("X2") + " ";
+                if(byteCounter >= 13) stringPackets += b.ToString("X2") + " ";
                 byteCounter++;
 
                 switch(byteCounter)
@@ -112,11 +125,11 @@ namespace MyPacketCapturer
                             if (data[13] == 6) stringPackets += "(ARP)";
                         }
                         break;
+                        
                 }
+                
             }
-
-
-
+           
             stringPackets += Environment.NewLine + Environment.NewLine;
             byteCounter = 0;
             stringPackets += "Raw Data" + Environment.NewLine;
@@ -139,28 +152,7 @@ namespace MyPacketCapturer
 
         }
 
-        //private void btnstartstop_click(object sender, eventargs e)
-        //{
-        //    try
-        //    {
-        //        if (btnstartstop.text == "start")
-        //        {
-        //            device.startcapture();
-        //            timer1.enabled = true;
-        //            btnstartstop.text = "stop";
-        //        }
-        //        else
-        //        {
-        //            device.stopcapture();
-        //            timer1.enabled = true;
-        //            btnstartstop.text = "start";
-        //        }
-        //    }
-        //    catch (exception ex) { }
-        //}
-
-        //Dump the packet data from stringPackets to the text box
-        private void timer1_Tick(object sender, EventArgs e)
+         public void timer1_Tick(object sender, EventArgs e)
         {
             txtCapturedData.AppendText(stringPackets);
             stringPackets = "";
@@ -168,7 +160,7 @@ namespace MyPacketCapturer
             //txtNumPackets.Text = numPackets + "";
         }
 
-        private void cmbDevices_SelectedIndexChanged(object sender, EventArgs e)
+        public void cmbDevices_SelectedIndexChanged(object sender, EventArgs e)
         {
             device = devices[cmbDevices.SelectedIndex];
             cmbDevices.Text = device.Description;
@@ -182,7 +174,7 @@ namespace MyPacketCapturer
             device.Open(DeviceMode.Promiscuous, readTimeoutMilliseconds);
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        public void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "Text Files|*.txt|All Files|*.*";
             saveFileDialog1.Title = "Save the Captured Packets";
@@ -195,7 +187,7 @@ namespace MyPacketCapturer
             }
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        public void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Text Files|*.txt|All Files|*.*";
             openFileDialog1.Title = "Open Captured Packets";
@@ -208,12 +200,12 @@ namespace MyPacketCapturer
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        public void label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void sendWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        public void sendWindowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (frmSend.instantiations == 0)
             {

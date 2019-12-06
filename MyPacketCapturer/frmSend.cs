@@ -21,7 +21,7 @@ namespace MyPacketCapturer
             instantiations++;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        public void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Text Files|*.txt|All Files|*.*";
             openFileDialog1.Title = "Open Captured Packets";
@@ -34,7 +34,7 @@ namespace MyPacketCapturer
             }
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        public void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "Text Files|*.txt|All Files|*.*";
             saveFileDialog1.Title = "Save the Captured Packets";
@@ -47,7 +47,7 @@ namespace MyPacketCapturer
             }
         }
 
-        private void btnSend_Click(object sender, EventArgs e)
+        public void btnSend_Click(object sender, EventArgs e)
         {
             string stringBytes = "";
             //Get the hex values from the file
@@ -82,12 +82,12 @@ namespace MyPacketCapturer
 
         } //End btnSend
 
-        private void frmSend_FormClosed(object sender, FormClosedEventArgs e)
+        public void frmSend_FormClosed(object sender, FormClosedEventArgs e)
         {
             instantiations--;
         }
 
-        private void frmSend_Load(object sender, EventArgs e)
+        public void frmSend_Load(object sender, EventArgs e)
         {
 
         }

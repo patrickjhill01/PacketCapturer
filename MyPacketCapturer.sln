@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPacketCapturer", "MyPacketCapturer\MyPacketCapturer.csproj", "{EB70E628-827B-4B4E-B505-3AA205EF08F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI_540_Tests", "CSCI_540_Tests\CSCI_540_Tests.csproj", "{0D845844-5970-4027-86F3-E3CC793285B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{EB70E628-827B-4B4E-B505-3AA205EF08F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB70E628-827B-4B4E-B505-3AA205EF08F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB70E628-827B-4B4E-B505-3AA205EF08F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D845844-5970-4027-86F3-E3CC793285B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D845844-5970-4027-86F3-E3CC793285B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D845844-5970-4027-86F3-E3CC793285B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D845844-5970-4027-86F3-E3CC793285B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

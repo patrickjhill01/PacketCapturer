@@ -33,11 +33,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="NinjaTurtles, Version=0.8.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NinjaTurtles.0.8.1.1\lib\net451\NinjaTurtles.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PacketDotNet">
       <HintPath>..\SharpPcap-4.2.0\Debug\PacketDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="PacketDotNet, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\PacketCapturer\MyPacketCapturer\bin\Debug\PacketDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="SharpPcap">
       <HintPath>..\SharpPcap-4.2.0\Debug\SharpPcap.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpPcap, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\PacketCapturer\MyPacketCapturer\bin\Debug\SharpPcap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,9 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmCapture.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="frmCapture.cs" />
     <Compile Include="frmCapture.Designer.cs">
       <DependentUpon>frmCapture.cs</DependentUpon>
     </Compile>
@@ -81,6 +103,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
