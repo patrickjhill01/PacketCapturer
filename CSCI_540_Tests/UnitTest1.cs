@@ -26,7 +26,7 @@ namespace UnitTestProject3
            // }
         }
         
-            [TestMethod]
+        [TestMethod]
         public void ApplicationDetectsAnIpAddress_StringAssertContains()
         {
             var capture = new frmCapture();
@@ -35,8 +35,10 @@ namespace UnitTestProject3
         [TestMethod]
         public void StringDataIsConvertedToBytes_AssertIsNotNull()
         {
+            //Arrange
             var sendTest = new frmSend();
             {
+                //act
                 var textPacket = new string[] { "6", "b", "5", "c" };
                 byte[] packet = new byte[textPacket.Length];
                 int i = 0;
@@ -53,6 +55,7 @@ namespace UnitTestProject3
                 {
                 }
                 var str = System.Text.Encoding.Default.GetString(packet);
+                //Assert
                 Console.Write("Packet Data: \n" + str);
                 Assert.IsNotNull(packet, str);
             }
@@ -60,8 +63,10 @@ namespace UnitTestProject3
         [TestMethod]
         public void TestByteDataIsConverted_AssertISNotNull()
         {
+            //arrange
             var sendTest = new frmSend();
             {
+                //act
                 string stringBytes = "";
                 var textPacket = new string[] { "c", "b", "a", "c" };
                 foreach (string s in textPacket)
@@ -79,6 +84,7 @@ namespace UnitTestProject3
                     packet[i] = Convert.ToByte(s, 16);
                     i++;
                 }
+                //assert
                 Console.Write("Packet Data: \n" + stringBytes);
                 Assert.IsNotNull(packet);
             }
@@ -98,9 +104,12 @@ namespace UnitTestProject3
         [TestMethod]
         public void Network_Adapter_Is_Detected()
         {
+            //arrange
             var program = new frmCapture();
+            //act
             var test = program.devices[1];
             var test1 = test.ToString();
+            //assert
             Console.WriteLine(test1);
             Assert.IsTrue(test1.Contains("HW addr"));
         }
